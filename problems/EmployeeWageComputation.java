@@ -1,48 +1,56 @@
 package com.employee.problems;
 
 public class EmployeeWageComputation {
-	public static final int IS_Employee_Present = 1;
-	public static final int Full_Time = 1;
-	public static final int Part_Time = 0;
-	public static final int EMP_RATE_PER_HOUR = 20;
-	public static final int NUM_OF_WORKING_DAYS = 20;
-	public static final int MAX_HRS_IN_MONTH = 100;
+	// CONSTANTS
+	public static final int IS_FULL_TIME = 1;
+	public static final int IS_PART_TIME = 0;
 
-	public static int ComputeEmpWage() {
+	// Define static method to calculate Employee Wage for multiple Companies
+	public static int CalcEmpWageForCompany(String Company, int EmpRatePerHr, int NumOfDays, int MaxHrs) {
+		// variables
 		int totalEmpHours = 0;
 		int empHrs = 0;
 		int totalWorkingDays = 0;
 
-		System.out.println("Welcome to the EmployeeWage Program");
-
-		while (totalEmpHours <= MAX_HRS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS) {
+		// Calculate Wages till total working hrs or days is reached for a month
+		while (totalEmpHours <= MaxHrs && totalWorkingDays < NumOfDays) {
 			totalWorkingDays++;
 
 			int employeeCheck = (int) Math.floor(Math.random() * 10) % 3;
-
+			// Switch Case
 			switch (employeeCheck) {
-			case Full_Time:
+			case IS_FULL_TIME:
 				System.out.println("Employee is full time");
 				totalEmpHours = 8;
 				break;
-			case Part_Time:
+			case IS_PART_TIME:
 				System.out.println("Employee is part time");
 				totalEmpHours = 4;
 				break;
 			default:
 				System.out.println("employee absent");
 				break;
-
 			}
+
+			// Display Working Day per Month
 			totalEmpHours += empHrs;
-			System.out.println("Day:" + NUM_OF_WORKING_DAYS + "Emp Hour:" + empHrs);
+			System.out.println("Day:" + totalWorkingDays + "Emp Hour:" + empHrs);
 		}
-		int totalEmpWage = totalEmpHours * EMP_RATE_PER_HOUR;
-		System.out.println("Total Employee Wage:" + totalEmpWage);
+
+		// Display total EmployeeWage per hour
+		int totalEmpWage = totalEmpHours * EmpRatePerHr;
+		System.out.println("Total Employee Wage for Company: " + Company + " is " + totalEmpWage);
 		return totalEmpWage;
 	}
 
-	public static void main(String args[]) {
-		ComputeEmpWage();
+	public static void main(String[] args) {
+		// Display the Welcome Message
+		System.out.println("Welcome to the EmployeeWage Program");
+
+		// EmployeeWage for Multiple Companies
+		int totalwage = CalcEmpWageForCompany("BridgeLabz", 20, 3, 10);
+		CalcEmpWageForCompany("Amdocs", 25, 4, 20);
+		CalcEmpWageForCompany("Capgemini", 30, 3, 20);
+		CalcEmpWageForCompany("Amazon", 20, 4, 10);
 	}
 }
